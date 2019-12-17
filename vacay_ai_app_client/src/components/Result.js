@@ -19,17 +19,25 @@ function Result(props) {
           {props.quizResult}
           <br />
         </strong> */}
-        <p>
-          Here is your matching destinations:
-          {props.matches.map(destination => {
-            return (
-              <>
-                <h2>{destination.name}</h2>
-                <img src={destination.image}></img>
-              </>
-            );
-          })}
-        </p>
+        <h1>
+          <strong>Here is your matching destinations: </strong>
+        </h1>
+        <div className="mainDiv">
+          <div className="childDiv">
+            {props.matches.map(destination => {
+              return (
+                <div className="mainHolder">
+                  <h2>
+                    {destination.name}, {destination.state}
+                  </h2>
+                  <div className="picHolder">
+                    <img src={destination.image}></img>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </CSSTransitionGroup>
   );

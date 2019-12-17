@@ -138,14 +138,19 @@ class Questionnaire extends Component {
 
   renderQuiz() {
     return (
-      <Quiz
-        answer={this.state.answer}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        question={this.state.question}
-        questionTotal={quizQuestions.length}
-        onAnswerSelected={this.handleAnswerSelected}
-      />
+      <div className="Title">
+        <h2>
+          <strong>Vacay Ai's Questionnaire</strong>
+        </h2>
+        <Quiz
+          answer={this.state.answer}
+          answerOptions={this.state.answerOptions}
+          questionId={this.state.questionId}
+          question={this.state.question}
+          questionTotal={quizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+        />
+      </div>
     );
   }
 
@@ -164,9 +169,7 @@ class Questionnaire extends Component {
             className="App-logo"
             alt="logo"
           /> */}
-        <div className="Title">
-          <h2>Vacay Ai's Questionnaire</h2>
-        </div>
+
         {/* </div> */}
         {this.state.result ? this.renderResult() : this.renderQuiz()}
       </div>
