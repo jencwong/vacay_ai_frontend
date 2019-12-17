@@ -50,7 +50,7 @@ class Register extends Component {
         // role: role
       };
       axios
-        .post(apiBaseUrl + "/register", payload)
+        .post(apiBaseUrl, payload)
         .then(function(response) {
           console.log(response);
           if (response.data.code === 200) {
