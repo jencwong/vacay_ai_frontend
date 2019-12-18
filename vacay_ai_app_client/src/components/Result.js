@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 // import PropTypes from "prop-types";
 import { CSSTransitionGroup } from "react-transition-group";
+import { Redirect } from "react-router-dom";
 
 function Result(props) {
+  const [toQuestionnaire, setQuestionnaire] = useState(false);
+  if (toQuestionnaire) {
+    return <Redirect to="/questionnaire" />;
+  }
   return (
     <CSSTransitionGroup
       className="container result"
@@ -19,8 +24,8 @@ function Result(props) {
           {props.quizResult}
           <br />
         </strong> */}
-        <h1>
-          <strong>Here is your matching destinations: </strong>
+        <h1 id="resultHeadline">
+          <strong>Here are your matching destinations: </strong>
         </h1>
         <div className="mainDiv">
           <div className="childDiv">
@@ -32,6 +37,15 @@ function Result(props) {
                   </h2>
                   <div className="picHolder">
                     <img src={destination.image}></img>
+                  </div>
+                  <div className="attractions">
+                    <p>List of Attractions:</p>
+                    <li>{destination.attractions}</li>
+                  </div>
+                  <div className="buttons is-centered">
+                    <button className="button is-success is-normal is-hovered">
+                      Favorite
+                    </button>
                   </div>
                 </div>
               );

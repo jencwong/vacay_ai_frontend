@@ -3,6 +3,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
+import { Redirect } from "react-router-dom";
 import DropDownMenu from "material-ui/DropDownMenu";
 import MenuItem from "material-ui/MenuItem";
 import axios from "axios";
@@ -17,7 +18,8 @@ class Login extends Component {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      toQuestionnaire: false
       //   menuValue: 1,
       //   loginComponent: localloginComponent
       //   loginRole: "user"
@@ -139,28 +141,29 @@ class Login extends Component {
   handleClick(event) {
     let self = this;
     let payload = {
-      userid: this.state.username,
+      username: this.state.username,
       password: this.state.password
       //   role: this.state.loginRole
     };
     axios
-      .post(apiBaseUrl + "login", payload)
+      .post(apiBaseUrl + "/login", payload)
       .then(function(response) {
         console.log(response);
         if (response.data.code == 200) {
           console.log("Login successfull");
-          let uploadScreen = [];
-          uploadScreen.push(
-            <Profile
-              appContext={self.props.appContext}
+          self.setState({ toQuestionnaire: true });
+          // let uploadScreen = [];
+          // uploadScreen.push(
+          //   <Profile
+          //     appContext={self.props.appContext}
 
-              //   role={self.state.loginRole}
-            />
-          );
-          self.props.appContext.setState({
-            loginPage: [],
-            uploadScreen: uploadScreen
-          });
+          //     //   role={self.state.loginRole}
+          //   />
+          // );
+          // self.props.appContext.setState({
+          //   loginPage: [],
+          //   uploadScreen: uploadScreen
+          // });
         } else if (response.data.code == 204) {
           console.log("Username password do not match");
           alert(response.data.success);
@@ -248,6 +251,10 @@ class Login extends Component {
   //     });
   //   }
   render() {
+    const { toQuestionnaire } = this.state;
+    if (toQuestionnaire) {
+      return <Redirect to="/questionnaire" />;
+    }
     return (
       <div>
         <MuiThemeProvider>
