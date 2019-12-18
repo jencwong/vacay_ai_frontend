@@ -24,6 +24,7 @@ class Questionnaire extends Component {
     };
 
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this.setResults = this.setResults.bind(this);
   }
 
   componentDidMount() {
@@ -114,15 +115,16 @@ class Questionnaire extends Component {
   }
 
   async setResults(result) {
-    this.setState({ result: result });
-
     try {
       const request = await axios.get(
         `/checkmatch/${this.state.ans_combination.join("")}`
       );
-      console.log("got", request);
+      await console.log("got", request);
       const matches = request.data;
-      this.setState({
+      // split here
+      // const destination = matches.attractions.split(",");
+      await this.setState({
+        result: result,
         matches: matches
       });
     } catch (err) {

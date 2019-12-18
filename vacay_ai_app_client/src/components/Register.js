@@ -18,6 +18,7 @@ class Register extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     console.log("nextProps", nextProps);
   }
@@ -77,6 +78,7 @@ class Register extends Component {
       alert("Input field value is missing");
     }
   }
+
   render() {
     // console.log("props",this.props);
     // let userhintText, userLabel;
