@@ -159,10 +159,12 @@ header {
 }
 
 .navbar {
-  height: 100px;
+  height: 200px;
   background-color: darkslategrey;
   /* background: url(https://i.imgur.com/25gKmFc.png) no-repeat center center;
   background-size: cover; */
+  font-weight: bold;
+  color: black;
   width: 200px;
 }
 /* .navbar-brand {
@@ -181,7 +183,7 @@ header {
 
 .navbar-end {
   /* text-align: right; */
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 }
 
 /* img.App-logo {
@@ -209,6 +211,7 @@ header {
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
@@ -237,7 +240,7 @@ header {
   margin: 10px;
 }
 
-#resultHeadline {
+.resultHeadline {
   border: red;
   font-size: 3rem;
   font-family: "Electrolize";

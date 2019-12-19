@@ -93,7 +93,7 @@ class Register extends Component {
       <div>
         <MuiThemeProvider>
           <div>
-            <AppBar title="Register" />
+            <AppBar style={{ background: "#3C921D" }} title="Register" />
             <TextField
               hintText="Enter your First Name"
               floatingLabelText="First Name"
@@ -137,8 +137,10 @@ class Register extends Component {
             />
             <br />
             <RaisedButton
+              backgroundColor="#3c921D"
+              labelColor="#ffffff"
               label="Submit"
-              primary={true}
+              // primary={true}
               style={style}
               onClick={event => this.handleClick(event, this.props.role)}
             />

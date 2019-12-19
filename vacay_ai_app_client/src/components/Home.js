@@ -22,7 +22,7 @@ class Home extends Component {
     loginscreen.push(
       <Login parentContext={this} appContext={this.props.parentContext} />
     );
-    let loginmessage = "Not registered yet, Register Now";
+    let loginmessage = "";
     this.setState({
       loginscreen: loginscreen,
       loginmessage: loginmessage
@@ -45,7 +45,7 @@ class Home extends Component {
     } else {
       var loginscreen = [];
       loginscreen.push(<Login parentContext={this} />);
-      loginmessage = "Not Registered yet.Go to registration";
+      loginmessage = "Not Registered yet. Register below.";
       this.setState({
         loginscreen: loginscreen,
         loginmessage: loginmessage,
@@ -61,12 +61,14 @@ class Home extends Component {
         {this.state.loginscreen}
         <div>
           {this.state.loginmessage}
-          <h3>User's Profile</h3>
+          {/* <h3>User's Profile</h3> */}
           <MuiThemeProvider>
             <div>
               <RaisedButton
+                backgroundColor="#3C921D"
+                labelColor="#ffffff"
                 label={this.state.buttonLabel}
-                primary={true}
+                // primary={true}
                 style={style}
                 onClick={event => this.handleClick(event)}
               />

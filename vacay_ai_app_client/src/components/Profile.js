@@ -5,17 +5,26 @@ import RaisedButton from "material-ui/RaisedButton";
 // import Register from "./Register";
 
 class Profile extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       username: "",
-  //       password: "",
-  //       loginscreen: [],
-  //       loginmessage: "",
-  //       buttonLabel: "Register",
-  //       isLogin: true
-  //     };
-  //   }
+  constructor(props) {
+    super(props);
+    this.state = {
+      matches: []
+    };
+    this.getMatches = this.getMatches.bind(this);
+  }
+  componentDidMount() {
+    this.getMatches();
+  }
+
+  getMatches() {
+    const user_id = sessionStorage.getItem("user_id");
+    fetch(`http://localhost:3000/profile/${user_id}`)
+      .then(response => response.json())
+      .then(jsoneMatches => this.setState({ matches: jsoneMatches }))
+      .catch(error => console.error(error));
+    //   .then(daters => console.log(daters));
+  }
+
   //   componentDidMount() {
   //     let loginscreen = [];
   //     loginscreen.push(
@@ -54,23 +63,32 @@ class Profile extends Component {
   //   }
   render() {
     return (
-      //       <div className="loginscreen">
-      //         {this.state.loginscreen}
-      //         <div>
-      //           {this.state.loginmessage}
-      <h3>User's Profile</h3>
-      //           <MuiThemeProvider>
-      //             <div>
-      //               <RaisedButton
-      //                 label={this.state.buttonLabel}
-      //                 primary={true}
-      //                 style={style}
-      //                 onClick={event => this.handleClick(event)}
-      //               />
-      //             </div>
-      //           </MuiThemeProvider>
-      //         </div>
-      //       </div>
+      <div>
+        {/* <h1>User's Profile</h1> */}
+        <h2 className="resultHeadline">
+          <strong>Your Favorites</strong>
+        </h2>
+        <div className="mainDiv">
+          <div className="childDiv">
+            {this.state.matches.map(destination => {
+              return (
+                <div className="mainHolder">
+                  <h2>
+                    {destination.name}, {destination.state}
+                  </h2>
+                  <div className="picHolder">
+                    <img src={destination.image}></img>
+                  </div>
+                  <div className="attractions">
+                    <p>List of Attractions:</p>
+                    <li>{destination.attractions}</li>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     );
   }
 }

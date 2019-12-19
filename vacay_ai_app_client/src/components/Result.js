@@ -2,7 +2,9 @@ import React, { Component } from "react";
 // import PropTypes from "prop-types";
 import { CSSTransitionGroup } from "react-transition-group";
 import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router";
 import Questionnaire from "./Questionnaire";
+import Profile from "./Profile";
 import axios from "axios";
 
 // function Result(props) {
@@ -15,32 +17,33 @@ class Result extends Component {
   constructor() {
     super();
     this.state = {
-      matches: []
+      matches: [],
+      user_id: "",
+      destination_id: ""
     };
   }
   async handleAdd(event, user_id, destination_id) {
+    console.log(user_id, destination_id);
     event.preventDefault();
-    await axios.post("/matches", user_id, destination_id);
-    console.log(this.state.user_id);
-    console.log(this.state.destination);
-    this.getMatches();
+    const matchData = {
+      user_id: user_id,
+      destination_id: destination_id
+    };
+    const newMatch = await axios.post("/matches", matchData);
+    console.log(newMatch.data);
+    this.props.history.push("/profile");
+    return <Redirect to="/profile" />;
   }
 
   async componentDidMount() {
     if (this.props.matches) {
       await console.log("mounted", this.props.matches);
       await this.setState({
-        matches: this.props.matches
+        matches: this.props.matches,
+        user_id: this.props.user_id,
+        destination_id: this.props.destination_id
       });
     }
-  }
-
-  getMatches() {
-    fetch("http://localhost:3000/matches")
-      .then(response => response.json())
-      .then(jsoneMatches => this.setState({ matches: jsoneMatches }))
-      .catch(error => console.error(error));
-    //   .then(daters => console.log(daters));
   }
 
   render() {
@@ -60,7 +63,7 @@ class Result extends Component {
           {props.quizResult}
           <br />
         </strong> */}
-          <h1 id="resultHeadline">
+          <h1 className="resultHeadline">
             <strong>Here are your matching destinations: </strong>
           </h1>
           <div className="mainDiv">
@@ -80,7 +83,14 @@ class Result extends Component {
                       <li>{destination.attractions}</li>
                     </div>
                     <div className="buttons is-centered">
-                      <button className="button is-success is-normal is-hovered">
+                      <button
+                        className="button is-success is-normal is-hovered"
+                        onClick={event => {
+                          const user_id = sessionStorage.getItem("user_id");
+
+                          this.handleAdd(event, user_id, destination.id);
+                        }}
+                      >
                         Favorite
                       </button>
                     </div>
@@ -99,4 +109,4 @@ class Result extends Component {
 //   quizResult: PropTypes.string.isRequired
 // };
 
-export default Result;
+export default withRouter(Result);

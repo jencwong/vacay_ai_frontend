@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./App.css";
 import About from "./components/About.js";
 import Questionnaire from "./components/Questionnaire.js";
@@ -64,21 +65,14 @@ class App extends Component {
             <img className="App-logo" src="https://i.imgur.com/25gKmFc.png" />
           </header>
           <nav
-            className="navbar"
+            className="navbar-menu is-active"
             role="navigation"
             aria-label="main navigation"
           >
             <div className="navbar-brand">
-              {/* <a class="navbar-item" href="#">
-                <img
-                  src="https://i.imgur.com/25gKmFc.png"
-                  // width="112"
-                  // height="28"
-                />
-              </a> */}
               <a
                 role="button"
-                className="navbar-burger burger is-active"
+                className="navbar-burger"
                 aria-label="menu"
                 aria-expanded="false"
                 data-target="navbarBasicExample"
@@ -90,16 +84,6 @@ class App extends Component {
             </div>
 
             <div id="navbarBasicExample" className="navbar-menu">
-              {/* <div className="navbar-start"> */}
-              {/* <a class="navbar-item" href="#">
-                    <img
-                      src="https://i.imgur.com/25gKmFc.png"
-                      // width="112"
-                      // height="28"
-                    />
-                  </a> */}
-              {/* </div> */}
-
               <div className="navbar-start">
                 <a className="navbar-item">
                   <Link to="/">Home</Link>
@@ -116,9 +100,11 @@ class App extends Component {
               </div>
 
               <div className="navbar-end">
-                <a className="navbar-item">
-                  <Link to="/logout">Logout</Link>
-                </a>
+                <div className="navbar-item">
+                  <a className="button is-danger is-outlined">
+                    <Link to="/logout">Logout</Link>
+                  </a>
+                </div>
               </div>
             </div>
           </nav>
@@ -145,7 +131,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
 
 // import React, { Component } from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";

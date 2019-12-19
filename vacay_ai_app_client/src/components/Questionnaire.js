@@ -122,7 +122,7 @@ class Questionnaire extends Component {
       await console.log("got", request);
       const matches = request.data;
       // split here
-      // const destination = matches.attractions.split(",");
+      // const destination = [matches.attractions.split(",")];
       await this.setState({
         result: result,
         matches: matches

@@ -5,13 +5,34 @@ import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import { Redirect } from "react-router-dom";
 import DropDownMenu from "material-ui/DropDownMenu";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "material-ui/MenuItem";
+
 import axios from "axios";
 // replace UploadPage with Profile
 // import UploadPage from "./UploadPage";
 import Profile from "./Profile";
 
 let apiBaseUrl = "http://localhost:3000/users";
+
+// const styles = theme => ({
+//   Login: {
+//     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+//   }
+// });
+
+// const styles = {
+//   root: {
+//     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+//     borderRadius: 3,
+//     border: 0,
+//     color: "white",
+//     height: 48,
+//     padding: "0 30px",
+//     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+//   }
+// };
 
 class Login extends Component {
   constructor(props) {
@@ -151,6 +172,13 @@ class Login extends Component {
         console.log(response);
         if (response.data.code == 200) {
           console.log("Login successfull");
+
+          sessionStorage.setItem("user_id", response.data.user[0].id);
+
+          const user_id = sessionStorage.getItem("user_id");
+
+          console.log(`Session user id: ${user_id}`);
+
           self.setState({ toQuestionnaire: true });
           // let uploadScreen = [];
           // uploadScreen.push(
@@ -251,14 +279,18 @@ class Login extends Component {
   //     });
   //   }
   render() {
-    const { toQuestionnaire } = this.state;
-    if (toQuestionnaire) {
-      return <Redirect to="/questionnaire" />;
-    }
+    // const { classes } = this.props;
+
+    // return <div className={classes.Login}>Login</div>;
+
+    // const { toQuestionnaire } = this.state;
+    // if (toQuestionnaire) {
+    //   return <Redirect to="/questionnaire" />;
+    // }
     return (
       <div>
         <MuiThemeProvider>
-          <AppBar title="Login" />
+          <AppBar style={{ background: "#3C921D" }} title="Login" />
           <TextField
             hintText="Enter your Username"
             floatingLabelText="Username"
@@ -277,8 +309,10 @@ class Login extends Component {
           />
           <br />
           <RaisedButton
+            backgroundColor="#3C921D"
+            labelColor="#ffffff"
             label="Submit"
-            primary={true}
+            // primary={true}
             style={style}
             onClick={event => this.handleClick(event)}
           />
@@ -306,4 +340,5 @@ const style = {
   margin: 15
 };
 
+// export default withStyles(styles)(Login);
 export default Login;
