@@ -24,6 +24,7 @@ class Questionnaire extends Component {
     };
 
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this.setResults = this.setResults.bind(this);
   }
 
   componentDidMount() {
@@ -114,15 +115,16 @@ class Questionnaire extends Component {
   }
 
   async setResults(result) {
-    this.setState({ result: result });
-
     try {
       const request = await axios.get(
         `/checkmatch/${this.state.ans_combination.join("")}`
       );
-      console.log("got", request);
+      await console.log("got", request);
       const matches = request.data;
-      this.setState({
+      // split here
+      // const destination = [matches.attractions.split(",")];
+      await this.setState({
+        result: result,
         matches: matches
       });
     } catch (err) {
@@ -138,14 +140,19 @@ class Questionnaire extends Component {
 
   renderQuiz() {
     return (
-      <Quiz
-        answer={this.state.answer}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        question={this.state.question}
-        questionTotal={quizQuestions.length}
-        onAnswerSelected={this.handleAnswerSelected}
-      />
+      <div className="Title">
+        <h2>
+          <strong>Vacay Ai's Questionnaire</strong>
+        </h2>
+        <Quiz
+          answer={this.state.answer}
+          answerOptions={this.state.answerOptions}
+          questionId={this.state.questionId}
+          question={this.state.question}
+          questionTotal={quizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+        />
+      </div>
     );
   }
 
@@ -164,9 +171,7 @@ class Questionnaire extends Component {
             className="App-logo"
             alt="logo"
           /> */}
-        <div className="Title">
-          <h2>Vacay Ai's Questionnaire</h2>
-        </div>
+
         {/* </div> */}
         {this.state.result ? this.renderResult() : this.renderQuiz()}
       </div>

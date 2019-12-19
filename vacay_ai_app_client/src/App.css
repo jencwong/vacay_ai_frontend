@@ -61,3 +61,10 @@
     transform: rotate(360deg);
   }
 }
+.loginbutton {
+  background-color: green;
+}
+
+.loginAppBar {
+  background-color: green;
+}

@@ -1,14 +1,30 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./App.css";
 import About from "./components/About.js";
 import Questionnaire from "./components/Questionnaire.js";
 import Profile from "./components/Profile.js";
 import Home from "./components/Home.js";
+import Login from "./components/Login.js";
+import Logout from "./components/Logout.js";
 import "bulma/css/bulma.css";
+import "./index.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loginPage: [],
+      uploadScreen: []
+    };
+  }
   componentDidMount() {
+    var loginPage = [];
+    loginPage.push(<Home appContext={this} key={"login-screen"} />);
+    this.setState({
+      loginPage: loginPage
+    });
     document.addEventListener("DOMContentLoaded", () => {
       // Get all "navbar-burger" elements
       const $navbarBurgers = Array.prototype.slice.call(
@@ -44,76 +60,78 @@ class App extends Component {
               classNameName="App-logo"
               alt="logo"
             /> */}
-        <header>
-          <img className="App-logo" src="https://i.imgur.com/25gKmFc.png" />
-        </header>
-        <nav className="navbar" role="navigation" aria-label="main navigation">
-          <div className="navbar-brand">
-            {/* <a class="navbar-item" href="#">
-                <img
-                  src="https://i.imgur.com/25gKmFc.png"
-                  // width="112"
-                  // height="28"
-                />
-              </a> */}
-            <a
-              role="button"
-              className="navbar-burger burger is-active"
-              aria-label="menu"
-              aria-expanded="false"
-              data-target="navbarBasicExample"
-            >
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
-          </div>
-
-          <div id="navbarBasicExample" className="navbar-menu">
-            {/* <div className="navbar-start"> */}
-            {/* <a class="navbar-item" href="#">
-                    <img
-                      src="https://i.imgur.com/25gKmFc.png"
-                      // width="112"
-                      // height="28"
-                    />
-                  </a> */}
-            {/* </div> */}
-
-            <div className="navbar-start">
-              <a className="navbar-item">
-                <Link to="/">Home</Link>
-              </a>
-              <a className="navbar-item">
-                <Link to="/about">About</Link>
-              </a>
-              <a className="navbar-item">
-                <Link to="/questionnaire">Questionnaire</Link>
-              </a>
-              <a className="navbar-item">
-                <Link to="/profile">Profile</Link>
+        <div className="App">
+          <header>
+            <img className="App-logo" src="https://i.imgur.com/25gKmFc.png" />
+          </header>
+          <nav
+            className="navbar-menu is-active"
+            role="navigation"
+            aria-label="main navigation"
+          >
+            <div className="navbar-brand">
+              <a
+                role="button"
+                className="navbar-burger"
+                aria-label="menu"
+                aria-expanded="false"
+                data-target="navbarBasicExample"
+              >
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
               </a>
             </div>
 
-            <div className="navbar-end">
-              <a className="navbar-item">
-                <Link to="/signup">Sign-up</Link>
-              </a>
+            <div id="navbarBasicExample" className="navbar-menu">
+              <div className="navbar-start">
+                <a className="navbar-item">
+                  <Link to="/">Home</Link>
+                </a>
+                <a className="navbar-item">
+                  <Link to="/about">About</Link>
+                </a>
+                <a className="navbar-item">
+                  <Link to="/questionnaire">Questionnaire</Link>
+                </a>
+                <a className="navbar-item">
+                  <Link to="/profile">Profile</Link>
+                </a>
+              </div>
+
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  <a className="button is-danger is-outlined">
+                    <Link to="/logout">Logout</Link>
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </nav>
-        {/* </header> */}
-        <Route path="/" exact component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/questionnaire" component={Questionnaire} />
-        <Route path="/profile" component={Profile} />
-        {/* </div> */}
+          </nav>
+
+          {/* <div className="home">
+            {this.state.loginPage}
+            {this.state.uploadScreen}
+          </div> */}
+          {/* </header> */}
+          <Route path="/" exact component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/questionnaire" component={Questionnaire} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/logout" component={Logout} />
+          {/* </div> */}
+          <footer className="footer">
+            <small>
+              &copy; Copyright 2019, Jennie Wong, All Rights Reserved
+            </small>
+          </footer>
+        </div>
       </Router>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
 
 // import React, { Component } from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";

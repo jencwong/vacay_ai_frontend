@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Electrolize");
+
 body {
   margin: 0;
   padding: 0;
@@ -151,15 +153,18 @@ body {
 header {
   padding: 5px;
   display: flex;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   text-align: center;
+  background-color: rgba(60, 146, 29);
 }
 
 .navbar {
-  height: 100px;
+  height: 200px;
   background-color: darkslategrey;
   /* background: url(https://i.imgur.com/25gKmFc.png) no-repeat center center;
   background-size: cover; */
+  font-weight: bold;
+  color: black;
   width: 200px;
 }
 /* .navbar-brand {
@@ -178,7 +183,7 @@ header {
 
 .navbar-end {
   /* text-align: right; */
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
 }
 
 /* img.App-logo {
@@ -190,4 +195,53 @@ header {
   margin: 30px;
   justify-content: center;
   text-align: center;
+}
+
+.mainDiv {
+  border: solid 2px black;
+  display: flex;
+  flex-direction: row;
+  /* background-color: rgba(0, 0, 0, 0.65); */
+
+  color: white;
+}
+
+.childDiv {
+  border: solid 2px darkslategray;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(60, 146, 29, 1) 30%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+.mainHolder {
+  flex: 25%;
+  margin: 2%;
+  padding: 2%;
+  background-color: white;
+  color: black;
+}
+
+.picHolder img {
+  max-height: 75%;
+}
+
+.footer {
+  text-align: left;
+}
+
+.buttons {
+  margin: 10px;
+}
+
+.resultHeadline {
+  border: red;
+  font-size: 3rem;
+  font-family: "Electrolize";
 }
