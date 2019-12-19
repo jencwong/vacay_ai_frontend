@@ -283,10 +283,10 @@ class Login extends Component {
 
     // return <div className={classes.Login}>Login</div>;
 
-    // const { toQuestionnaire } = this.state;
-    // if (toQuestionnaire) {
-    //   return <Redirect to="/questionnaire" />;
-    // }
+    const { toQuestionnaire } = this.state;
+    if (toQuestionnaire) {
+      return <Redirect to="/questionnaire" />;
+    }
     return (
       <div>
         <MuiThemeProvider>

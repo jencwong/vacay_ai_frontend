@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from "material-ui/RaisedButton";
+import axios from "axios";
 // import Login from "./Login";
 // import Register from "./Register";
 
@@ -11,7 +12,14 @@ class Profile extends Component {
       matches: []
     };
     this.getMatches = this.getMatches.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
+  async handleDelete(destination_id) {
+    console.log(destination_id);
+    const deleteMatch = await axios.delete(`/matches/${destination_id}`);
+    this.getMatches();
+  }
+
   componentDidMount() {
     this.getMatches();
   }
@@ -74,14 +82,25 @@ class Profile extends Component {
               return (
                 <div className="mainHolder">
                   <h2>
-                    {destination.name}, {destination.state}
+                    {destination.destination.name},{" "}
+                    {destination.destination.state}
                   </h2>
                   <div className="picHolder">
-                    <img src={destination.image}></img>
+                    <img src={destination.destination.image}></img>
                   </div>
                   <div className="attractions">
                     <p>List of Attractions:</p>
-                    <li>{destination.attractions}</li>
+                    <li>{destination.destination.attractions}</li>
+                  </div>
+                  <div className="buttons is-centered">
+                    <button
+                      className="button is-danger is-normal is-hovered"
+                      onClick={event => {
+                        this.handleDelete(destination.matchid);
+                      }}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               );
